@@ -1,0 +1,105 @@
+input
+{
+	margin:4px;
+}
+
+#game
+{
+	display:none;
+}
+
+#timer
+{
+	position:absolute;
+	left:600px;
+	font-size:24px;
+}
+
+#players
+{
+	position: absolute;
+	left:0px;
+	top:0px;
+	bottom:0px;
+	width:256px;
+	border-right:1px solid #aaaaaa;
+	padding:8px;
+	box-sizing:border-box;
+}
+
+#start
+{
+	position: absolute;
+	right:516px;
+	top:4px;
+}
+
+#wordEntry
+{
+	position: absolute;
+	right:0px;
+	top:0px;
+	bottom:0px;
+	width:512;
+	border-left:1px solid #aaaaaa;
+	box-sizing:border-box;
+}
+
+#words
+{
+	box-sizing:border-box;
+	padding:8px;
+	font-family:Helvetica;
+	position:absolute;
+	top:0px;
+	left:0px;
+	right:0px;
+	bottom:32px;
+	overflow:auto;
+}
+
+#input
+{
+	position: absolute;
+	bottom:4px;
+	left:4px;
+	width:calc(100% - 80px);
+	box-sizing:border-box;
+	margin:1px;
+}
+
+#submit
+{
+	position: absolute;
+	bottom:4px;
+	right:4px;
+	width:64px;
+	box-sizing:border-box;
+	margin:0px;
+}
+
+#board
+{
+	position: absolute;
+	left:260px;
+	top:4px;
+	border:1px solid #aaaaaa;
+	border-radius:5px;
+	padding:4px;
+	display:none;
+	background-color:#000066;
+}
+
+#board > div
+{
+	border:1px solid #aaaaaa;
+	border-radius:5px;
+	width:64px;
+	height:64px;
+	text-align:center;
+	line-height:64px;
+	font-size:24px;
+	display:inline-block;
+	margin:4px;
+	background-color:white;
+}

@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<title>Boggle Online</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/socket.js"></script>
+		<script src="js/boggle.js"></script>
+	</head>
+	<body>
+		<div id="setup">
+			Nickname: <input type="text" id="name" value="Peggy" />
+			Room ID: <input type="text" id="room" value="BoggleFun" />
+			Server Address: <input type="text" id="ip" value="98.193.176.25" />
+			Server Port: <input type="number" id="port" value="5080" />
+			<button id="joinGame">Join Game</button>
+			<button id="createGame">Create Game</button>
+		</div>
+		<div id="game">
+			<div id="timer">0:00</div>
+			<div id="players"></div>
+			<button id="start">Start Game</button>
+			<div id="board">
+				<div id="b1"></div><div id="b2"></div><div id="b3"></div><div id="b4"></div><br />
+				<div id="b5"></div><div id="b6"></div><div id="b7"></div><div id="b8"></div><br />
+				<div id="b9"></div><div id="b10"></div><div id="b11"></div><div id="b12"></div><br />
+				<div id="b13"></div><div id="b14"></div><div id="b15"></div><div id="b16"></div>
+			</div>
+			<div id="wordEntry">
+				<div id="words"></div>
+				<input type="text" id="input" />
+				<button id="submit">Submit</button>
+			</div>
+		</div>
+
+		<script>
+			init();
+		</script>
+	</body>
+</html>
