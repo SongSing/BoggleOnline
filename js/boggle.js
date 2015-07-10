@@ -2,6 +2,7 @@ var socket;
 var words = [];
 var timerTime = 0;
 var timer;
+var gameLength = 0;
 
 function init()
 {
@@ -92,6 +93,27 @@ function setTimer(seconds)
 	f();
 }
 
+function escapeHtml(x)
+{
+	var map =
+	{
+		"&": "&amp;",
+		"<": "&lt;",
+		">": "&gt;",
+		"\"": "&quot;",
+		"'": "&#39;",
+		"/": "&#x2F;",
+		"\"": "&92;"
+	};
+	
+	for (var thing in map)
+	{
+		x = x.replace(new RegExp(thing, "g"), map[thing]);
+	}
+	
+	return x;
+}
+
 function submitWord()
 {
 	var word = $("#input").get(0).value;
@@ -161,28 +183,62 @@ function handleMessage(msg)
 	}
 	else if (command === "start")
 	{
+		$("#start").hide();
+		$("#words").empty();
+		$("#results").empty();
+		
 		notify(data.player + " has started a game of Boggle! Starts in " + data.wait + " seconds!");;
 		words = [];
-		setTimer(5);
+		setTimer(data.wait);
+		gameLength = data.length;
 	}
 	else if (command === "board")
 	{
-		$("#start").hide();
+		setTimer(gameLength);
 		$("#board").show();
 		words = [];
 		for (var i = 0; i < 16; i++)
 		{
 			$("#b" + (i + 1)).text(data[i].toUpperCase());
 		}
-		setTimer(3 * 60);
 	}
 	else if (command === "end")
 	{
-		socket.send("words", words)
+		socket.send("words", words);
 	}
 	else if (command === "winner")
-	{
-		alert("Winner(s): " + data.players.join(", "));
+	{	
+		var fib = [ 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597 ];
+		var winners = data.players;
+		var scores = data.scores;
+		var pwords = data.words;
+		
+		$("#results").html("Winner(s): " + escapeHtml(winners.join(", ")) + "<hr />");
+		
+		for (var p in pwords)
+		{
+			pwords[p] = pwords[p].map(function(item)
+			{
+				return item + " (" + fib[item.length - 2] + ")";
+			});
+			
+			var div = document.createElement("div");
+			div.className = "result";
+			
+			var d = $(div);
+			d.text("");
+			
+			var won = winners.indexOf(p) !== -1;
+			console.log(winners);
+			console.log(p);
+			console.log(won);
+			
+			d.html((won ? "<b>" : "") + escapeHtml(p) + (won ? "</b>" : "") + "<br />"
+				+ "Words: " + escapeHtml(pwords[p].join(", ")) + "<br />"
+				+ "Score: " + scores[p] + "<hr />");
+			
+			$("#results").append(d);
+		}
 		
 		$("#start").show();
 	}

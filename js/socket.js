@@ -48,6 +48,7 @@ Socket.prototype.connect = function()
 
 Socket.prototype.sendRaw = function(data)
 {
+    console.log("sending: " + data);
     this.socket.send(data);
 };
 
