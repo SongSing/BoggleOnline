@@ -26,6 +26,16 @@ function init()
 		}
 	});
 	
+	$("#sendChat").click(sendChat);
+	
+	$("#chatInput").keypress(function(e)
+	{
+		if (e.which === 13)
+		{
+			sendChat();
+		}
+	});
+	
 	$("#start").click(function()
 	{
 		socket.send("start", "");
@@ -126,9 +136,23 @@ function submitWord()
 	$("#input").get(0).value = "";
 	var d = document.createElement("div");
 	$(d).text(word);
-	$("#words").append(d)
+	$("#words").append(d);
+	$("#words").get(0).scrollTop = $("#words").get(0).scrollHeight;
 	
 	words.push(word);
+}
+
+function sendChat()
+{
+	var msg = $("#chatInput").val();
+	
+	if (msg.length < 1)
+	{
+		return;
+	}
+	
+	$("#chatInput").val("");
+	socket.send("chat", msg);
 }
 
 function initSocket(ip, port)
@@ -241,6 +265,18 @@ function handleMessage(msg)
 		}
 		
 		$("#start").show();
+	}
+	else if (command === "chat")
+	{
+		var player = data.player;
+		var msg = data.message;
+		
+		var d = document.createElement("div");
+		$(d).html("<b>" + escapeHtml(player) + ":</b> " + escapeHtml(msg));
+		d.className = "chatMessage";
+		
+		$("#chat").append(d);
+		$("#chat").get(0).scrollTop = $("#chat").get(0).scrollHeight;
 	}
 }
 

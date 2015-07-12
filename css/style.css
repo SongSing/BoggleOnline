@@ -25,11 +25,74 @@ input
 	position: absolute;
 	left:0px;
 	top:0px;
-	bottom:0px;
+	bottom:70%;
 	width:256px;
+	border-right:1px solid #aaaaaa;
+	border-bottom:1px solid #aaaaaa;
+	padding:8px;
+	box-sizing:border-box;
+	overflow-y:auto;
+}
+
+#chatContainer
+{
+	position:absolute;
+	left:0px;
+	bottom:0px;
+	height:70%;
 	border-right:1px solid #aaaaaa;
 	padding:8px;
 	box-sizing:border-box;
+	width:256px;
+}
+
+#chat
+{
+	padding:0px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	right:0px;
+	bottom:32px;
+}
+
+#chatInput
+{
+	position: absolute;
+	bottom:4px;
+	left:4px;
+	width:calc(100% - 80px);
+	box-sizing:border-box;
+	margin:1px;
+}
+
+#sendChat
+{
+	position: absolute;
+	bottom:4px;
+	right:4px;
+	width:64px;
+	box-sizing:border-box;
+	margin:0px;
+	overflow-y:auto;
+}
+
+.chatMessage
+{
+	box-sizing:border-box;
+	width:100%;
+	padding:4px;
+	word-wrap:break-word;
+}
+
+.chatMessage:nth-child(odd)
+{
+	background-color:white;
+}
+
+.chatMessage:nth-child(even)
+{
+	background-color:#DDDDFF;
 }
 
 #start
