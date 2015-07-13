@@ -54,6 +54,7 @@ input
 	top:0px;
 	right:0px;
 	bottom:32px;
+	overflow-y:auto;
 }
 
 #chatInput
@@ -122,7 +123,8 @@ input
 	left:0px;
 	right:0px;
 	bottom:32px;
-	overflow:auto;
+	overflow-y:auto;
+	word-wrap:break-word;
 }
 
 #input
