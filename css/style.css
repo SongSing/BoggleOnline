@@ -86,12 +86,12 @@ input
 	word-wrap:break-word;
 }
 
-.chatMessage:nth-child(odd)
+.a
 {
 	background-color:white;
 }
 
-.chatMessage:nth-child(even)
+.b
 {
 	background-color:#DDDDFF;
 }

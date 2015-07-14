@@ -3,6 +3,8 @@ var words = [];
 var timerTime = 0;
 var timer;
 var gameLength = 0;
+var chatSwitch = false;
+var lastChat = "";
 
 function init()
 {
@@ -180,6 +182,7 @@ function handleMessage(msg)
 		var playing = data;
 
 		// setup accordingly
+		// nothing to do here atm, since you can't join games that are in progress
 	}
 	else if (command === "players")
 	{
@@ -203,6 +206,7 @@ function handleMessage(msg)
 	}
 	else if (command === "removePlayer")
 	{
+		console.log("removing " + data);
 		$("#player" + data).remove();
 	}
 	else if (command === "start")
@@ -275,6 +279,15 @@ function handleMessage(msg)
 		$(d).html("<b>" + escapeHtml(player) + ":</b> " + escapeHtml(msg));
 		d.className = "chatMessage";
 		
+		if (player !== lastChat)
+		{
+			chatSwitch = !chatSwitch;
+		}
+		
+		d.className += " " + (chatSwitch ? "a" : "b");
+		
+		lastChat = player;
+		
 		$("#chat").append(d);
 		$("#chat").get(0).scrollTop = $("#chat").get(0).scrollHeight;
 	}
@@ -290,10 +303,11 @@ function joinGame(creating)
 		}
 	}
 
-	var name = $("#name").get(0).value;
-	var room = $("#room").get(0).value;
-	var ip = $("#ip").get(0).value;
-	var port = $("#port").get(0).value;
+	var name = $("#name").val();
+	var room = $("#room").val();
+	var ip = $("#ip").val();
+	var port = $("#port").val();
+	var length = $("#length").val();
 
 	if (name.length === 0)
 	{
@@ -323,6 +337,7 @@ function joinGame(creating)
 	info.name = name;
 	info.room = room;
 	info.creating = creating;
+	info.gameLength = length;
 
 	initSocket(ip, port);
 
