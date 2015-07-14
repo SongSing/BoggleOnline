@@ -128,14 +128,14 @@ function escapeHtml(x)
 
 function submitWord()
 {
-	var word = $("#input").get(0).value;
+	var word = $("#input").val().toLowerCase();
 	
 	if (word.length < 3)
 	{
 		return;
 	}
 	
-	$("#input").get(0).value = "";
+	$("#input").val("");
 	var d = document.createElement("div");
 	$(d).text(word);
 	$("#words").append(d);
@@ -240,6 +240,20 @@ function handleMessage(msg)
 		var winners = data.players;
 		var scores = data.scores;
 		var pwords = data.words;
+		var dups = data.duplicates;
+		
+		dups = dups.map(function (item)
+		{
+			var h = words.indexOf(item) !== -1;
+			item = escapeHtml(item);
+			
+			if (h)
+			{
+				item = "<b>" + item + "</b>";
+			}
+			
+			return item;
+		});
 		
 		$("#results").html("Winner(s): " + escapeHtml(winners.join(", ")) + "<hr />");
 		
@@ -267,6 +281,13 @@ function handleMessage(msg)
 			
 			$("#results").append(d);
 		}
+		
+		var ddiv = document.createElement("div");
+		var dd = $(ddiv);
+		
+		dd.html("Duplicated words (not counted): " + dups.join(", ") + "<hr />");
+		
+		$("#results").append(dd);
 		
 		$("#start").show();
 	}
