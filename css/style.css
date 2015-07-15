@@ -99,7 +99,7 @@ input
 #start
 {
 	position: absolute;
-	right:516px;
+	right:260px;
 	top:4px;
 }
 
@@ -109,7 +109,7 @@ input
 	right:0px;
 	top:0px;
 	bottom:0px;
-	width:512px;
+	width:256px;
 	border-left:1px solid #aaaaaa;
 	box-sizing:border-box;
 }
@@ -179,7 +179,7 @@ input
 	position:absolute;
 	left:256px;
 	top:312px;
-	right:512px;
+	right:256px;
 	bottom:0px;
 	overflow-y:auto;
 	word-wrap:break-word;

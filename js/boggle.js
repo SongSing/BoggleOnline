@@ -130,7 +130,7 @@ function submitWord()
 {
 	var word = $("#input").val().toLowerCase();
 	
-	if (word.length < 3)
+	if (word.length < 3 || word.length > 17)
 	{
 		return;
 	}
@@ -179,7 +179,10 @@ function handleMessage(msg)
 		$("#setup").hide();
 		$("#game").show();
 
-		var playing = data;
+		var playing = data.playing;
+		gameLength = data.gameLength;
+		
+		$("#start").text("Start Game (" + gameLength + "s)");
 
 		// setup accordingly
 		// nothing to do here atm, since you can't join games that are in progress
@@ -297,7 +300,7 @@ function handleMessage(msg)
 		var msg = data.message;
 		
 		var d = document.createElement("div");
-		$(d).html("<b>" + escapeHtml(player) + ":</b> " + escapeHtml(msg));
+		$(d).html((player === lastChat ? "" : "<b>" + escapeHtml(player) + ":</b> ") + escapeHtml(msg));
 		d.className = "chatMessage";
 		
 		if (player !== lastChat)
@@ -306,6 +309,7 @@ function handleMessage(msg)
 		}
 		
 		d.className += " " + (chatSwitch ? "a" : "b");
+		d.title = player;
 		
 		lastChat = player;
 		
