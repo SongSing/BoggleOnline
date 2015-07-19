@@ -210,7 +210,7 @@ function handleMessage(msg)
 	else if (command === "removePlayer")
 	{
 		console.log("removing " + data);
-		$("#player" + data).remove();
+		$("#player" + data.replace(/\s/g, "\\ ")).remove();
 	}
 	else if (command === "start")
 	{
